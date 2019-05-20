@@ -1,0 +1,6 @@
+$breakpoints: (
+  'mobile-s-min': (min-width: 20em),
+  'tablet-min': (min-width: 48em),
+  'laptop-min': (min-width: 64em),
+  'laptop-l-min': (min-width: 90em),
+) !default;
