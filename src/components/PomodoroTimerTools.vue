@@ -2,14 +2,23 @@
   <nav class="PomodoroTimerTools">
     <ul class="PomodoroTimerTools__list">
       <li class="PomodoroTimerTools__item">
-        <button class="PomodoroTimerTools__toggler">
+        <button 
+          class="PomodoroTimerTools__toggler"
+          v-on:click="restartTimer()"
+        >
           <span aria-hidden="true">&#9850;</span>
           <span class="visuallyhidden">Restart</span>
         </button>
       </li>
       <li class="PomodoroTimerTools__item">
-        <button class="PomodoroTimerTools__toggler PomodoroTimerTools__toggler--main">
-          <span aria-hidden="true">&#9658;</span>
+        <button 
+          class="PomodoroTimerTools__toggler PomodoroTimerTools__toggler--main"
+          v-on:click="switchToggleButtonState()"
+        >
+          <span 
+            aria-hidden="true"
+            v-html="switchToggleButtonIcon()"
+          ></span>
           <span class="visuallyhidden">Start/stop pomodoro</span>
         </button>
       </li>
@@ -24,8 +33,42 @@
 </template>
 
 <script>
+import { eventBus } from '../main';
+
 export default {
-  name: 'PomodoroTimerTools'
+  name: 'PomodoroTimerTools',
+  data() {
+    return {
+      isToggleButtonPressed: false,
+    }
+  },
+  created() {
+    window.addEventListener('keydown', (event) => {
+      if (event.key.toLowerCase() === 's') {
+        return this.switchToggleButtonState();
+      }
+
+      if (event.key.toLowerCase() === 'r') {
+        return this.restartTimer();
+      }
+    });
+  },
+  methods: {
+    restartTimer() {
+      this.isToggleButtonPressed = false;
+      eventBus.$emit('p-timer-tools-restart');
+    },
+    switchToggleButtonState() {
+      this.isToggleButtonPressed = !this.isToggleButtonPressed;
+      eventBus.$emit('p-timer-tools-toggle', this.isToggleButtonPressed);
+    },
+    switchToggleButtonIcon() {
+      if (this.isToggleButtonPressed) {
+        return `&#10073; &#10073;`
+      }
+      return `&#9658;`;
+    }
+  },
 }
 </script>
 
