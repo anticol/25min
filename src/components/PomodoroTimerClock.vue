@@ -39,6 +39,22 @@ export default {
       return this.stop();
     });
     eventBus.$on('p-timer-tools-restart', () => this.restart());
+    eventBus.$on('p-settings-sidebar-work-time-change', (valueInSeconds) => {
+      this.workTime = valueInSeconds;
+      this.restart();
+    });
+    eventBus.$on('p-settings-sidebar-break-time-change', (valueInSeconds) => {
+      this.breakTime = valueInSeconds;
+      this.restart();
+    });
+    eventBus.$on('p-settings-sidebar-long-break-time-change', (valueInSeconds) => {
+      this.longBreakTime = valueInSeconds;
+      this.restart();
+    });
+    eventBus.$on('p-settings-sidebar-reset-defaults', () => {
+      this.resetDefaults();
+      this.restart();
+    });
   },
   methods: {
     start() {

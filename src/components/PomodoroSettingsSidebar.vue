@@ -12,7 +12,7 @@
     </button>
     <form class="PomodoroSettingsSidebar__form">
       <label for="p-settings-sidebar-range-work">Work</label>
-      <p>25</p>
+      <p>{{ workTimeInputValue }}</p>
       <input 
         type="range"
         min="1"
@@ -21,9 +21,10 @@
         value="25"
         class="PomodoroSettingsSidebar__range"
         id="p-settings-sidebar-range-work"
+        v-on:change="updateWorkTime"
       >
       <label for="p-settings-sidebar-range-break">Break</label>
-      <p>5</p>
+      <p>{{ breakTimeInputValue }}</p>
       <input 
         type="range"
         min="1"
@@ -32,9 +33,10 @@
         value="5"
         class="PomodoroSettingsSidebar__range"
         id="p-settings-sidebar-range-break"
+        v-on:change="updateBreakTime"
       >
       <label for="p-settings-sidebar-range-long-break">Long Break</label>
-      <p>10</p>
+      <p>{{ longBreakTimeInputValue }}</p>
       <input 
         type="range"
         min="1"
@@ -43,24 +45,30 @@
         value="10"
         class="PomodoroSettingsSidebar__range"
         id="p-settings-sidebar-range-long-break"
+        v-on:change="updateLongBreakTime"
       >
       <input 
         type="reset"
         value="Reset to defaults"
         class="PomodoroSettingsSidebar__reset"
+        v-on:click="resetDefaults()"
       >
     </form>
   </aside>
 </template>
 
 <script>
+import config from '../../config';
 import { eventBus } from '../main';
 
 export default {
   name: 'PomodoroSettingsSidebar',
   data() {
     return {
-      isVisible: false
+      isVisible: false,
+      workTimeInputValue: config.workTimeInSeconds / 60,
+      breakTimeInputValue: config.breakTimeInSeconds / 60,
+      longBreakTimeInputValue: config.longBreakTimeInSeconds / 60
     }
   },
   created() {
@@ -72,7 +80,29 @@ export default {
     toggleSidebar() {
       this.isVisible = !this.isVisible;
       eventBus.$emit('p-settings-sidebar-button-toggle');
-    }
+    },
+    updateWorkTime(event) {
+      this.workTimeInputValue = event.target.value;
+      eventBus.$emit('p-timer-tools-toggle-stop');
+      eventBus.$emit('p-settings-sidebar-work-time-change', event.target.value * 60);
+    },
+    updateBreakTime(event) {
+      this.breakTimeInputValue = event.target.value;
+      eventBus.$emit('p-timer-tools-toggle-stop');
+      eventBus.$emit('p-settings-sidebar-break-time-change', event.target.value * 60);
+    },
+    updateLongBreakTime(event) {
+      this.longBreakTimeInputValue = event.target.value;
+      eventBus.$emit('p-timer-tools-toggle-stop');
+      eventBus.$emit('p-settings-sidebar-long-break-time-change', event.target.value * 60);
+    },
+    resetDefaults() {
+      this.workTimeInputValue = config.workTimeInSeconds / 60;
+      this.breakTimeInputValue = config.breakTimeInSeconds / 60;
+      this.longBreakTimeInputValue = config.longBreakTimeInSeconds / 60;
+      eventBus.$emit('p-timer-tools-toggle-stop');
+      eventBus.$emit('p-settings-sidebar-reset-defaults');
+    },
   }
 }
 </script>

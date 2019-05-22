@@ -52,6 +52,9 @@ export default {
         return this.restartTimer();
       }
     });
+     eventBus.$on('p-timer-tools-toggle-stop', () => {
+       this.isToggleButtonPressed = false;
+     });
   },
   methods: {
     restartTimer() {
