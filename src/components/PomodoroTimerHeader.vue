@@ -1,12 +1,28 @@
 <template>
   <header class="PomodoroTimerHeader">
-    <h2 class="PomodoroTimerHeader__heading">Work</h2>
+    <h2 class="PomodoroTimerHeader__heading">{{ title }}</h2>
   </header>
 </template>
 
 <script>
+import config from '../../config';
+import { eventBus } from '../main';
+
 export default {
-  name: 'PomodoroTimerHeader'
+  name: 'PomodoroTimerHeader',
+  data() {
+    return {
+      title: config.titles.work,
+    }
+  },
+  created() {
+    eventBus.$on('p-timer-header-title-change', title => this.updateTitle(title));
+  },
+  methods: {
+    updateTitle(title) {
+      this.title = title;
+    }
+  }
 }
 </script>
 

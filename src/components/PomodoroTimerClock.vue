@@ -100,13 +100,16 @@ export default {
         if (this.shortBreakCounter >= config.breaksUntilLongBreak) {
           this.shortBreakCounter = 0;
           this.isLongBreak = true;
+          eventBus.$emit('p-timer-header-title-change', config.titles.longBreak);
         } else {
           this.shortBreakCounter++;
           this.isBreak = true;
+          eventBus.$emit('p-timer-header-title-change', config.titles.break);
         }
       } else {
         this.isLongBreak = false;
         this.isBreak = false;
+        eventBus.$emit('p-timer-header-title-change', config.titles.work);
       }
     },
     resetTimer() {
