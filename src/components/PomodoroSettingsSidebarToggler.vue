@@ -2,17 +2,31 @@
   <button 
     class="PomodoroSettingsSidebarToggler"
     v-bind:class="{ 'PomodoroSettingsSidebarToggler--hidden': !isVisible }"
+    v-on:click="toggleButton"
   >
     <span class="visuallyhidden">Open menu</span>
   </button>
 </template>
 
 <script>
+import { eventBus } from '../main';
+
 export default {
   name: 'PomodoroSettingsSidebarToggler',
   data() {
     return {
-      isVisible: true
+      isVisible: true,
+    }
+  },
+  created() {
+    eventBus.$on('p-settings-sidebar-button-toggle', () => {
+      this.isVisible = !this.isVisible;
+    });
+  },
+  methods: {
+    toggleButton() {
+      this.isVisible = !this.isVisible;
+      eventBus.$emit('p-settings-sidebar-toggle');
     }
   }
 }
@@ -30,7 +44,7 @@ export default {
   height: 25px;
   outline: none;
   position: absolute;
-  right: 25px;
+  right: 35px;
   top: 25px;
   width: 40px;
 

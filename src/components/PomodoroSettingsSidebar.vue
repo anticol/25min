@@ -5,6 +5,7 @@
   >
     <button 
       class="PomodoroSettingsSidebar__closer"
+      v-on:click="toggleSidebar"
     >
       <span aria-hidden="true">&times;</span>
       <span class="visuallyhidden">Close menu</span>
@@ -53,11 +54,24 @@
 </template>
 
 <script>
+import { eventBus } from '../main';
+
 export default {
   name: 'PomodoroSettingsSidebar',
   data() {
     return {
       isVisible: false
+    }
+  },
+  created() {
+    eventBus.$on('p-settings-sidebar-toggle', () => {
+      this.isVisible = !this.isVisible;
+    });
+  },
+  methods: {
+    toggleSidebar() {
+      this.isVisible = !this.isVisible;
+      eventBus.$emit('p-settings-sidebar-button-toggle');
     }
   }
 }
