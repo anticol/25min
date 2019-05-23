@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import beep from '../assets/audio/beep.mp3';
 import config from '../../config';
 import { eventBus } from '../main';
 
@@ -73,10 +74,14 @@ export default {
     restart() {
       this.stop();
       this.resetTimer();
+      this.updateTitle();
     },
     countdown(to = 0) {
       --this.timer;
+      this.updateTitle();
       if (this.timer <= to) {
+        this.playAudio(beep);
+
         this.stop();
         this.resetTimer();
         this.updateState();
@@ -119,6 +124,14 @@ export default {
       this.workTime = config.workTimeInSeconds;
       this.breakTime = config.breakTimeInSeconds;
       this.longBreakTime = config.longBreakTimeInSeconds;
+    },
+    playAudio(audio) {
+      return new Audio(audio).play();
+    },
+    updateTitle() {
+      const base = 'Vue Pomodoro';
+      const type = this.isLongBreak ? 'Long Break' : this.isBreak ? 'Break' : 'Work';
+      document.title = `${base} - ${type} - ${this.formatTime}`;
     }
   },
 }
