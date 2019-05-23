@@ -22,7 +22,10 @@
           <span class="visuallyhidden">Start/stop pomodoro</span>
         </button>
       </li>
-      <li class="PomodoroTimerTools__item">
+      <li 
+        class="PomodoroTimerTools__item"
+        v-on:click="toggleInfoModal()"
+      >
         <button class="PomodoroTimerTools__toggler">
           <span aria-hidden="true">&#8505;</span>
           <span class="visuallyhidden">Info</span>
@@ -51,10 +54,14 @@ export default {
       if (event.key.toLowerCase() === 'r') {
         return this.restartTimer();
       }
+
+      if (event.key.toLowerCase() === 'i') {
+        return this.toggleInfoModal();
+      }
     });
-     eventBus.$on('p-timer-tools-toggle-stop', () => {
-       this.isToggleButtonPressed = false;
-     });
+    eventBus.$on('p-timer-tools-toggle-stop', () => {
+      this.isToggleButtonPressed = false;
+    });
   },
   methods: {
     restartTimer() {
@@ -70,6 +77,9 @@ export default {
         return `&#10073; &#10073;`
       }
       return `&#9658;`;
+    },
+    toggleInfoModal() {
+      eventBus.$emit('p-timer-tools-modal-toggle');
     }
   },
 }

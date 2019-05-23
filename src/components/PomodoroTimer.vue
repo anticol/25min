@@ -1,5 +1,6 @@
 <template>
   <section class="PomodoroTimer">
+    <PomodoroTimerModal/>
     <PomodoroTimerHeader/>
     <PomodoroTimerClock/>
     <PomodoroTimerTools/>
@@ -7,6 +8,7 @@
 </template>
 
 <script>
+import PomodoroTimerModal from './PomodoroTimerModal';
 import PomodoroTimerClock from './PomodoroTimerClock';
 import PomodoroTimerHeader from './PomodoroTimerHeader';
 import PomodoroTimerTools from './PomodoroTimerTools';
@@ -14,6 +16,7 @@ import PomodoroTimerTools from './PomodoroTimerTools';
 export default {
   name: 'PomodoroTimer',
   components: {
+    PomodoroTimerModal,
     PomodoroTimerClock,
     PomodoroTimerHeader,
     PomodoroTimerTools
