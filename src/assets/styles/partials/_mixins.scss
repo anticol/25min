@@ -1,0 +1,32 @@
+@import './variables/_breakpoints';
+@import './variables/_palette';
+
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media #{inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
+    }
+  }
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+@mixin input-range-thumb() {
+  background: $palette-background-primary;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+}
+
+@mixin input-range-track() {
+  background: $palette-font-secondary;
+  border: 0.5px solid $palette-font-secondary;
+  border-radius: 0.5px;
+  cursor: pointer;
+  height: 1.5px;
+  width: 100%;
+}

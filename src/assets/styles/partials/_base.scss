@@ -1,0 +1,17 @@
+@import './variables/_palette';
+@import './variables/_fonts';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $fonts-size-primary;
+  font-family: $fonts-family-primary;
+}
+
+body {
+  background: $palette-background-primary;
+  color: $palette-font-primary;
+  margin: 0.5em;
+}
