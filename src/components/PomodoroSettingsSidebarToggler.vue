@@ -44,8 +44,8 @@ export default {
   height: 25px;
   outline: none;
   position: absolute;
-  right: 35px;
-  top: 25px;
+  right: 20px;
+  top: 20px;
   width: 40px;
 
   &--hidden {

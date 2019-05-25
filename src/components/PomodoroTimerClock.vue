@@ -139,6 +139,7 @@ export default {
 
 <style lang="scss">
 @import '../assets/styles/partials/variables/_palette';
+@import '../assets/styles/partials/_mixins';
 
 .PomodoroTimerClock {
   align-items: center;
@@ -149,8 +150,17 @@ export default {
   justify-content: center;
   width: 250px;
 
+  @include respond-to('tablet-min') {
+    height: 300px;
+    width: 300px;
+  }
+
   &__counter {
     font-size: 3rem;
+
+    @include respond-to('tablet-min') {
+      font-size: 3.5rem;
+    }
   }
 }
 </style>
