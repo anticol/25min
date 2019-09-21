@@ -36,7 +36,7 @@ export default {
     eventBus.$on('p-timer-tools-toggle', (isStarted) => {
       if (isStarted) {
         return this.start();
-      } 
+      }
       return this.stop();
     });
     eventBus.$on('p-timer-tools-restart', () => this.restart());
@@ -105,16 +105,16 @@ export default {
         if (this.shortBreakCounter >= config.breaksUntilLongBreak) {
           this.shortBreakCounter = 0;
           this.isLongBreak = true;
-          eventBus.$emit('p-timer-header-title-change', config.titles.longBreak);
+          eventBus.$emit('p-timer-header-title-change', this.$t('long_break'));
         } else {
           this.shortBreakCounter++;
           this.isBreak = true;
-          eventBus.$emit('p-timer-header-title-change', config.titles.break);
+          eventBus.$emit('p-timer-header-title-change', this.$t('break'));
         }
       } else {
         this.isLongBreak = false;
         this.isBreak = false;
-        eventBus.$emit('p-timer-header-title-change', config.titles.work);
+        eventBus.$emit('p-timer-header-title-change', this.$t('work'));
       }
     },
     resetTimer() {
@@ -129,15 +129,14 @@ export default {
       return new Audio(audio).play();
     },
     updateTitle() {
-      const base = 'Vue Pomodoro';
-      const type = this.isLongBreak ? 'Long Break' : this.isBreak ? 'Break' : 'Work';
-      document.title = `${base} - ${type} - ${this.formatTime}`;
+      const type = this.isLongBreak ? this.$t('long_break') : this.isBreak ? this.$t('break') : this.$t('work');
+      document.title = `${type} - ${this.formatTime}`;
     }
   },
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../assets/styles/partials/variables/_palette';
 @import '../assets/styles/partials/_mixins';
 
@@ -151,8 +150,8 @@ export default {
   width: 250px;
 
   @include respond-to('tablet-min') {
-    height: 300px;
-    width: 300px;
+    height: 250px;
+    width: 250px;
   }
 
   &__counter {
@@ -164,3 +163,33 @@ export default {
   }
 }
 </style>
+
+<i18n>
+  {
+  "en": {
+  "work": "Work",
+  "break": "Break",
+  "long_break": "Long Break"
+  },
+  "sk": {
+  "work": "Práca",
+  "break": "Prestávka",
+  "long_break": "Dlhá prestávka"
+  },
+  "de": {
+  "work": "Arbeit",
+  "break": "Pause",
+  "long_break": "Lange Pause"
+  },
+  "fr": {
+  "work": "Travail",
+  "break": "Pause",
+  "long_break": "Longe Pause"
+  },
+  "es": {
+  "work": "Trabajado",
+  "break": "Pausa",
+  "long_break": "Pausa Larga"
+  }
+  }
+</i18n>

@@ -1,9 +1,9 @@
 <template>
-  <aside 
+  <aside
     class="PomodoroSettingsSidebar"
     v-bind:class="{ 'PomodoroSettingsSidebar--hidden': !isVisible }"
   >
-    <button 
+    <button
       class="PomodoroSettingsSidebar__closer"
       v-on:click="toggleSidebar"
     >
@@ -11,9 +11,9 @@
       <span class="visuallyhidden">Close menu</span>
     </button>
     <form class="PomodoroSettingsSidebar__form">
-      <label for="p-settings-sidebar-range-work">Work</label>
+      <label for="p-settings-sidebar-range-work">{{$t('work')}}</label>
       <p>{{ workTimeInputValue }}</p>
-      <input 
+      <input
         type="range"
         min="1"
         max="120"
@@ -23,9 +23,9 @@
         id="p-settings-sidebar-range-work"
         v-on:change="updateWorkTime"
       >
-      <label for="p-settings-sidebar-range-break">Break</label>
+      <label for="p-settings-sidebar-range-break">{{$t('break')}}</label>
       <p>{{ breakTimeInputValue }}</p>
-      <input 
+      <input
         type="range"
         min="1"
         max="60"
@@ -35,9 +35,9 @@
         id="p-settings-sidebar-range-break"
         v-on:change="updateBreakTime"
       >
-      <label for="p-settings-sidebar-range-long-break">Long Break</label>
+      <label for="p-settings-sidebar-range-long-break">{{$t('long_break')}}</label>
       <p>{{ longBreakTimeInputValue }}</p>
-      <input 
+      <input
         type="range"
         min="1"
         max="100"
@@ -47,7 +47,7 @@
         id="p-settings-sidebar-range-long-break"
         v-on:change="updateLongBreakTime"
       >
-      <input 
+      <input
         type="reset"
         value="Reset to defaults"
         class="PomodoroSettingsSidebar__reset"
@@ -107,7 +107,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../assets/styles/partials/variables/_palette';
 @import '../assets/styles/partials/_mixins';
 @import '../assets/styles/partials/_helpers';
@@ -122,7 +122,7 @@ export default {
   position: fixed;
   right: 0;
   top: 0;
-  width: 320px;
+  width: 350px;
   z-index: 1;
 
   &--hidden {
@@ -184,7 +184,7 @@ export default {
     }
 
     &:focus {
-      border: 3px dotted $palette-font-primary;
+      border: 0px;
       outline: none;
     }
 
@@ -213,9 +213,39 @@ export default {
       margin-top: -8.75px;
     }
 
-    &::-ms-tooltip { 
+    &::-ms-tooltip {
       display: none;
     }
   }
 }
 </style>
+
+<i18n>
+  {
+  "en": {
+  "work": "Work",
+  "break": "Break",
+  "long_break": "Long Break"
+  },
+  "sk": {
+  "work": "Práca",
+  "break": "Prestávka",
+  "long_break": "Dlhá prestávka"
+  },
+  "de": {
+  "work": "Arbeit",
+  "break": "Pause",
+  "long_break": "Lange Pause"
+  },
+  "fr": {
+  "work": "Travail",
+  "break": "Pause",
+  "long_break": "Longe Pause"
+  },
+  "es": {
+  "work": "Trabajado",
+  "break": "Pausa",
+  "long_break": "Pausa Larga"
+  }
+  }
+</i18n>

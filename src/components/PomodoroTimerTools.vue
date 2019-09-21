@@ -2,7 +2,7 @@
   <nav class="PomodoroTimerTools">
     <ul class="PomodoroTimerTools__list">
       <li class="PomodoroTimerTools__item">
-        <button 
+        <button
           class="PomodoroTimerTools__toggler"
           v-on:click="restartTimer()"
         >
@@ -11,26 +11,26 @@
         </button>
       </li>
       <li class="PomodoroTimerTools__item">
-        <button 
+        <button
           class="PomodoroTimerTools__toggler PomodoroTimerTools__toggler--main"
           v-on:click="switchToggleButtonState()"
         >
-          <span 
+          <span
             aria-hidden="true"
             v-html="switchToggleButtonIcon()"
           ></span>
           <span class="visuallyhidden">Start/stop pomodoro</span>
         </button>
       </li>
-      <li 
-        class="PomodoroTimerTools__item"
-        v-on:click="toggleInfoModal()"
-      >
-        <button class="PomodoroTimerTools__toggler">
-          <span aria-hidden="true">&#8505;</span>
-          <span class="visuallyhidden">Info</span>
-        </button>
-      </li>
+      <!--<li-->
+        <!--class="PomodoroTimerTools__item"-->
+        <!--v-on:click="toggleInfoModal()"-->
+      <!--&gt;-->
+        <!--<button class="PomodoroTimerTools__toggler">-->
+          <!--<span aria-hidden="true">&#8505;</span>-->
+          <!--<span class="visuallyhidden">Info</span>-->
+        <!--</button>-->
+      <!--</li>-->
     </ul>
   </nav>
 </template>
@@ -74,7 +74,7 @@ export default {
     },
     switchToggleButtonIcon() {
       if (this.isToggleButtonPressed) {
-        return `&#10073; &#10073;`
+        return `&#10073;&#10073;`
       }
       return `&#9658;`;
     },
@@ -85,13 +85,13 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../assets/styles/partials/variables/_palette';
 @import '../assets/styles/partials/_helpers';
 
 .PomodoroTimerTools {
   margin-top: 1em;
-    
+
   &__list {
     display: flex;
     list-style: none;
@@ -104,7 +104,8 @@ export default {
   }
 
   &__toggler {
-    background: transparent;
+    /*background: transparent;*/
+    background-image: url("../assets/buttons.png");
     border: 3px solid $palette-font-secondary;
     border-radius: 50%;
     color: $palette-font-secondary;
@@ -115,6 +116,10 @@ export default {
     &--main {
       height: 60px;
       width: 60px;
+    }
+
+    &--main span {
+      font-size: 25px;
     }
 
     &:hover,

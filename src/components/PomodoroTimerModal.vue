@@ -5,7 +5,7 @@
     v-bind:aria-hidden="!isVisible"
   >
     <section class="PomodoroTimerModal__content">
-      <button 
+      <button
         class="PomodoroSettingsSidebar__closer"
         v-on:click="toggleVisibility()"
       >
@@ -42,7 +42,7 @@ export default {
     eventBus.$on('p-timer-tools-modal-toggle', () =>  {
       this.toggleVisibility();
     });
-    
+
     window.addEventListener('keydown', (event) => {
       if (event.key.toLowerCase() === 'escape' && this.isVisible) {
         this.toggleVisibility();
@@ -57,7 +57,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../assets/styles/partials/variables/_palette';
 @import '../assets/styles/partials/_mixins';
 

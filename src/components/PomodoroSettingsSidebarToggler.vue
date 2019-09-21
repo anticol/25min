@@ -1,5 +1,5 @@
 <template>
-  <button 
+  <button
     class="PomodoroSettingsSidebarToggler"
     v-bind:class="{ 'PomodoroSettingsSidebarToggler--hidden': !isVisible }"
     v-on:click="toggleButton"
@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../assets/styles/partials/variables/_palette';
 @import '../assets/styles/partials/_helpers';
 

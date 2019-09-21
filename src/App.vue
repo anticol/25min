@@ -3,7 +3,15 @@
     <PomodoroSettingsSidebarToggler/>
     <PomodoroSettingsSidebar/>
     <PomodoroHeader/>
-    <PomodoroTimer/>
+    <div class="row">
+      <div class='column'>
+      <PomodoroTimer/>
+        </div>
+        <div class='column'>
+      <Todo></Todo>
+        </div>
+    </div>
+
   </div>
 </template>
 
@@ -12,6 +20,9 @@ import PomodoroSettingsSidebarToggler from './components/PomodoroSettingsSidebar
 import PomodoroSettingsSidebar from './components/PomodoroSettingsSidebar';
 import PomodoroHeader from './components/PomodoroHeader';
 import PomodoroTimer from './components/PomodoroTimer';
+import Todo from './components/Todo';
+
+
 
 export default {
   name: 'app',
@@ -20,6 +31,23 @@ export default {
     PomodoroTimer,
     PomodoroSettingsSidebarToggler,
     PomodoroSettingsSidebar,
+    Todo
   }
 }
 </script>
+
+<style>
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+  }
+</style>
