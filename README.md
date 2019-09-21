@@ -1,5 +1,5 @@
-# Vue-Pomodoro
-Simple pomodoro timer in Vue.js
+# 25min
+Pomodoro timer and TODO list
 
 ## Project setup
 ```
