@@ -1,6 +1,4 @@
 module.exports = {
-    // baseUrl: '/dist/',
-    // publicPath: '/dist/',
     baseUrl: '/',
     publicPath: '/',
 
